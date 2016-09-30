@@ -39,13 +39,13 @@ class PlayerSpec: QuickSpec {
                 it("returns a readout of the Player instance") {
                     let description = player.description
                     
-                    expect(description.lowercaseString).to(contain("player"))
-                    expect(description.lowercaseString).to(contain("cards"))
-                    expect(description.lowercaseString).to(contain("handscore"))
-                    expect(description.lowercaseString).to(contain("blackjack"))
-                    expect(description.lowercaseString).to(contain("busted"))
-                    expect(description.lowercaseString).to(contain("stayed"))
-                    expect(description.lowercaseString).to(contain("tokens"))
+                    expect(description.lowercased()).to(contain("player"))
+                    expect(description.lowercased()).to(contain("cards"))
+                    expect(description.lowercased()).to(contain("handscore"))
+                    expect(description.lowercased()).to(contain("blackjack"))
+                    expect(description.lowercased()).to(contain("busted")) 
+                    expect(description.lowercased()).to(contain("stayed"))
+                    expect(description.lowercased()).to(contain("tokens"))
                 }
             }
             

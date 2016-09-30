@@ -288,8 +288,8 @@ class DealerSpec: QuickSpec {
                     
                     let message = dealer.award()
                     
-                    expect(message.lowercaseString).to(contain("player"))
-                    expect(message.lowercaseString).to(contain("wins"))
+                    expect(message.lowercased()).to(contain("player"))
+                    expect(message.lowercased()).to(contain("wins"))
                 }
                 
                 it("should award the bet to the house's tokens when the house wins") {
@@ -310,8 +310,8 @@ class DealerSpec: QuickSpec {
                     
                     let message = dealer.award()
                     
-                    expect(message.lowercaseString).to(contain("house"))
-                    expect(message.lowercaseString).to(contain("wins"))
+                    expect(message.lowercased()).to(contain("house"))
+                    expect(message.lowercased()).to(contain("wins"))
                 }
                 
                 it("should not award the bet if the game is not over") {
@@ -336,8 +336,8 @@ class DealerSpec: QuickSpec {
                     
                     let message = dealer.award()
                     
-                    expect(message.lowercaseString).to(contain("no"))
-                    expect(message.lowercaseString).to(contain("winner"))
+                    expect(message.lowercased()).to(contain("no"))
+                    expect(message.lowercased()).to(contain("winner"))
                 }
             }
         }

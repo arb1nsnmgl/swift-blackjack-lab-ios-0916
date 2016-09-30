@@ -16,8 +16,8 @@ class Player {
     var handscore: UInt { return calculateScore() }
     var blackjack: Bool { return handscore == 21 && cards.count == 2 }
     var busted: Bool { return handscore > 21 }
-    var mayHit: Bool { return busted == blackjack && stayed || handscore < 21 }
-    var stayed = false
+    var mayHit: Bool { return !busted && !blackjack && stayed == false }
+    var stayed: Bool
     var tokens: UInt
     var description: String { return details() }
     
@@ -25,6 +25,7 @@ class Player {
         self.name = name
         self.tokens = 100
         self.cards = []
+        self.stayed = false
     }
     
     private func details() -> String {

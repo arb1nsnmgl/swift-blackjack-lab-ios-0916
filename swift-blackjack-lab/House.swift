@@ -10,13 +10,12 @@ import Foundation
 
 class House: Player {
     
-    var wallet: Double
-    var mustHit: Bool { return self.handscore < 17 }
-    
+    var mustHit: Bool { return self.mayHit && self.handscore < 17 }
     
     override init(name: String) {
-        self.wallet = 1000
         super.init(name: name)
+        self.tokens = 1000
+
     }
     
 }

@@ -37,5 +37,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      
      */
     
+    
+    
+    func playBlackjack(withBet: Int) {
+        
+        let dealer = Dealer()
+        
+        let bet: UInt = 0
+        
+        dealer.deal()
+            
+        while dealer.winner() == "no" && dealer.placeBet(bet) {
+        
+            dealer.turn(dealer.player)
+            dealer.turn(dealer.house)
+        }
+        
+        print(dealer.award())
+        
+    }
+    
+
+
 }
 

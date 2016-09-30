@@ -27,16 +27,17 @@ class Dealer {
     }
     
     func deal() {
-        if !player.stayed && !house.stayed {
-            deck.shuffle()
-            for _ in 1...2 { player.cards.append(deck.drawCard()) }
-            for _ in 1...2 { house.cards.append(deck.drawCard()) }
-        }
+        player.stayed = false; player.cards = []
+        house.stayed = false; house.cards = []
+        deck.shuffle()
+        player.cards.append(deck.drawCard()) ; house.cards.append(deck.drawCard())
+        player.cards.append(deck.drawCard()) ; house.cards.append(deck.drawCard())
+
     }
     
     func turn(_ player: House) {
-        if !player.busted {
-            if player.mayHit {
+        if player.mayHit {
+            if player.mustHit {
                 player.cards.append(deck.drawCard())
             } else {
                 player.stayed = true
@@ -45,31 +46,31 @@ class Dealer {
     }
     
     func winner() -> String {
-        if player.blackjack || house.busted {
-            player.cards = []
-            house.cards = []
+        
+        if house.busted || player.blackjack || player.cards.count == 5 && !player.busted {
             return "player"
-        } else if house.blackjack || player.busted || player.blackjack && house.blackjack {
-            player.cards = []
-            house.cards = []
+        } else if player.busted || house.blackjack || house.cards.count == 5 && !house.busted {
             return "house"
-        } else {
-            return "no"
-        }
+        } else if house.stayed && player.stayed {
+            if house.handscore >= player.handscore { return "house" } else { return "player" }
+        } else { return "no" }
         
     }
     
+    
     func award() -> String {
         let winnerOfTheRound = winner()
-        if winner() == player.name {
-            player.tokens += bet
-            house.tokens -= (bet / 2)
-        } else if winner() == house.name {
-            house.tokens += bet
-            player.tokens -= (bet / 2)
+        if winner() == "player" {
+            player.didWin(bet)
+            house.didLose(bet)
+        } else if winner() == "house" {
+            house.didWin(bet)
+            player.didLose(bet)
+        } else {
+            return "No winner."
         }
         
-    return "The winner of the round is \(winnerOfTheRound)."
+    return "\(winnerOfTheRound) wins."
         
     }
     
